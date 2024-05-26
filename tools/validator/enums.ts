@@ -4,4 +4,5 @@ export enum Times {
   HOUR = Times.MINUTE * 60,
   DAY = Times.HOUR * 24,
   YEAR = Times.DAY * 365,
+  ONE_HUNDRED_YEARS = new Date(Date.now()).setFullYear(new Date(Date.now()).getFullYear() + 100),
 }

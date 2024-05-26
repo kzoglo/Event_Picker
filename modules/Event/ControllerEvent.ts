@@ -1,4 +1,3 @@
-import { RequestHandler } from 'express';
 import RepoEvent from './RepoEvent';
 import ValidatorEvent from './valid';
 import { Request, Response, NextFunction } from 'express';

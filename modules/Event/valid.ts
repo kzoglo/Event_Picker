@@ -1,17 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
-import { Times } from '../../tools/validator/enums';
 import RequestValidator from '../../tools/validator/Validator';
 import { IEventCreate, IOverloadValidatePostEventGeneric, IOverloadValidatePostEventSpecific, IValidationValues } from './types';
 
 class ValidatorEvent {
   static readonly validationValues: IValidationValues = {
     firstName: {
-      min: 1,
+      min: 3,
       max: 100,
       regex: /^[a-żA-Ż]+(([',. -][a-żA-Ż ])?[a-żA-Ż]*)*$/,
     },
     lastName: {
-      min: 2,
+      min: 3,
       max: 100,
       regex: /^[a-żA-Ż]+(([',. -][a-żA-Ż ])?[a-żA-Ż]*)*$/,
     },
@@ -22,7 +21,12 @@ class ValidatorEvent {
     },
     eventDate: {
       min: Date.now(),
-      max: Date.now() + Times.YEAR * 100,
+      max:  (() => {
+        const currentDate = new Date(Date.now())
+        const maxAvailableDate = currentDate.setFullYear(currentDate.getFullYear() + 100)
+
+        return maxAvailableDate
+      })()
     }
   }
   private specificBool: boolean = false;
